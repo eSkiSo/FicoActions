@@ -92,6 +92,7 @@ class TaskNotifyCreator extends Base
             );
             return true;
         }
+        return false;
     }
 
     /**
@@ -103,6 +104,6 @@ class TaskNotifyCreator extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return true;
+        return $data['task']['column_id'] == $this->getParam('column_id');
     }
 }
