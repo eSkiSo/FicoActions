@@ -19,7 +19,7 @@ class Plugin extends Base
 
     public function getPluginAuthor()
     {
-        return 'Manuel Raposo <manuel.raposo@ficosa.com>';
+        return 'Manuel Raposo';
     }
 
     public function getPluginVersion()
@@ -34,6 +34,6 @@ class Plugin extends Base
 
     public function getPluginHomepage()
     {
-        return 'eSkiSo/FicoActions';
+        return 'https://github.com/eSkiSo/FicoActions';
     }
 }
