@@ -3,6 +3,7 @@
 namespace Kanboard\Plugin\FicoActions\Action;
 
 use Kanboard\Model\TaskModel;
+use Kanboard\Model\UserModel;
 use Kanboard\Action\Base;
 
 /**
@@ -62,9 +63,11 @@ class TaskNotifyCreator extends Base
     {
         return array(
             'task_id',
-            'project_id',
-            'creator_id',
-            'column_id',
+            'task' => array(
+                'project_id',
+                'creator_id',
+                'column_id',
+            ),
         );
     }
 
