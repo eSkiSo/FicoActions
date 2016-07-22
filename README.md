@@ -1,18 +1,18 @@
-Example of Automatic Action Plugin
+Automatic Action Plugin to Notify Creator
 ===================================
 
 This plugin add a new automatic action to Kanboard.
 
-This example change the task title when the task is moved to another column.
+This will notify the creator of the task when the task is moved to another column or closed.
 
 Author
 ------
 
-- Frederic Guillot
+- Manuel Raposo
 - License MIT
 
 Installation
 ------------
 
-- Create a directory **AutomaticAction** under the folder **plugins**
+- Create a directory **FicoActions** under the folder **plugins**
 - Copy all source files in this new directory
