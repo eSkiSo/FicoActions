@@ -21,7 +21,7 @@ class TaskNotifyCreator extends Base
      */
     public function getDescription()
     {
-        return t('Notify Task creator when the task is moved to another column or closed');
+        return t('Email the task creator');
     }
 
     /**
