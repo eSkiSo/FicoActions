@@ -1,14 +1,14 @@
 <?php
 
-namespace Kanboard\Plugin\AutomaticAction;
+namespace Kanboard\Plugin\FicoActions;
 
 use Kanboard\Core\Plugin\Base;
-use Kanboard\Plugin\AutomaticAction\Action\TaskRename;
+use Kanboard\Plugin\FicoActions\Action\TaskNotifyCreator;
 
 class Plugin extends Base
 {
     public function initialize()
     {
-        $this->actionManager->register(new TaskRename($this->container));
+        $this->actionManager->register(new TaskNotifyCreator($this->container));
     }
 }
