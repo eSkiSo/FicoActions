@@ -62,11 +62,9 @@ class TaskNotifyCreator extends Base
     {
         return array(
             'task_id',
-            'task' => array(
-                'project_id',
-                'creator_id',
-                'column_id',
-            ),
+            'project_id',
+            'creator_id',
+            'column_id',
         );
     }
 
