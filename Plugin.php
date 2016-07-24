@@ -2,6 +2,7 @@
 
 namespace Kanboard\Plugin\FicoActions;
 
+use Kanboard\Core\Translator;
 use Kanboard\Core\Plugin\Base;
 use Kanboard\Plugin\FicoActions\Action\TaskNotifyCreator;
 
@@ -25,6 +26,11 @@ class Plugin extends Base
     public function getPluginVersion()
     {
         return '0.0.1';
+    }
+
+    public function onStartup()
+    {
+        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__.'/Locale');
     }
 
     public function getPluginDescription()
