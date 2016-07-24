@@ -4,6 +4,8 @@ namespace Kanboard\Plugin\FicoActions\Action;
 
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\UserModel;
+use Kanboard\Model\TaskFinderModel;
+use Kanboard\Model\ColumnModel;
 use Kanboard\Action\Base;
 
 /**
@@ -63,11 +65,8 @@ class TaskNotifyCreator extends Base
     {
         return array(
             'task_id',
-            'task' => array(
-                'project_id',
-                'creator_id',
-                'column_id',
-            ),
+            'column_id',
+            'project_id'
         );
     }
 
@@ -80,14 +79,18 @@ class TaskNotifyCreator extends Base
      */
     public function doAction(array $data)
     {
-        $user = $this->userModel->getById($data['task']['creator_id']);
+        $taskInfo = $this->taskFinderModel->getById($data['task_id']);
+        $user = $this->userModel->getById($taskInfo['creator_id']);
+        $columnInfo = $this->columnModel->getById($taskInfo['creator_id']);
+        $taskInfo['column_title'] = $columnInfo['title'];
+
         if (! empty($user['email'])) {
             $this->emailClient->send(
                 $user['email'],
                 $user['name'] ?: $user['username'],
                 $this->getParam('subject'),
-                $this->template->render('notification/task_create', array(
-                    'task' => $data['task'],
+                $this->template->render('notification/task_move_column', array(
+                    'task' => $taskInfo,
                     'application_url' => $this->configModel->get('application_url'),
                 ))
             );
@@ -105,6 +108,6 @@ class TaskNotifyCreator extends Base
      */
     public function hasRequiredCondition(array $data)
     {
-        return $data['task']['column_id'] == $this->getParam('column_id');
+        return $data['column_id'] == $this->getParam('column_id');
     }
 }
