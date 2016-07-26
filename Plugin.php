@@ -25,7 +25,7 @@ class Plugin extends Base
 
     public function getPluginVersion()
     {
-        return '0.0.1';
+        return '0.0.2';
     }
 
     public function onStartup()
@@ -35,7 +35,7 @@ class Plugin extends Base
 
     public function getPluginDescription()
     {
-        return 'Notify Task creator when the task is moved to another column or closed';
+        return 'Re-assign task back to creator and notify by email when task is moved to defined column';
     }
 
     public function getPluginHomepage()

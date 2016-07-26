@@ -9,7 +9,7 @@ use Kanboard\Model\ColumnModel;
 use Kanboard\Action\Base;
 
 /**
- * Notify Task Creator on Action
+ * Notify Task Creator on Action and assign it back to him
  *
  * @package action
  * @author  Manuel Raposo
@@ -24,7 +24,7 @@ class TaskNotifyCreator extends Base
      */
     public function getDescription()
     {
-        return t('Email the task creator');
+        return t('Re-assign back to creator and notify by email');
     }
 
     /**
@@ -37,7 +37,6 @@ class TaskNotifyCreator extends Base
     {
         return array(
             TaskModel::EVENT_MOVE_COLUMN,
-            TaskModel::EVENT_CLOSE,
         );
     }
 
@@ -83,7 +82,7 @@ class TaskNotifyCreator extends Base
         $user = $this->userModel->getById($taskInfo['creator_id']);
         $columnInfo = $this->columnModel->getById($taskInfo['creator_id']);
         $taskInfo['column_title'] = $columnInfo['title'];
-
+        if($taskInfo['creator_id'] != $taskInfo['owner_id']) $this->taskModificationModel->update(array('id' => $data['task_id'], 'owner_id' => $taskInfo['creator_id']));
         if (! empty($user['email'])) {
             $this->emailClient->send(
                 $user['email'],
