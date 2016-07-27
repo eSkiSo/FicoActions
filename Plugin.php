@@ -13,8 +13,6 @@ class Plugin extends Base
     {
         $this->actionManager->register(new TaskNotifyCreator($this->container));
         $this->actionManager->register(new CommentDueDateChange($this->container));
-
-        //$this->template->hook->attach('template:notification', 'ficoactions:notification/due_date_updated');
     }
 
     public function getPluginName()
