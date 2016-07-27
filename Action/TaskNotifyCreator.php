@@ -1,6 +1,6 @@
 <?php
 
-namespace Kanboard\Plugin\FicoActions\Action;
+namespace Kanboard\Plugin\Ficoactions\Action;
 
 use Kanboard\Model\TaskModel;
 use Kanboard\Model\UserModel;
@@ -79,14 +79,14 @@ class TaskNotifyCreator extends Base
     public function doAction(array $data)
     {
         $taskInfo = $this->taskFinderModel->getById($data['task_id']);
-        $user = $this->userModel->getById($taskInfo['creator_id']);
+        $creator = $this->creatorModel->getById($taskInfo['creator_id']);
         $columnInfo = $this->columnModel->getById($taskInfo['creator_id']);
         $taskInfo['column_title'] = $columnInfo['title'];
         if($taskInfo['creator_id'] != $taskInfo['owner_id']) $this->taskModificationModel->update(array('id' => $data['task_id'], 'owner_id' => $taskInfo['creator_id']));
-        if (! empty($user['email'])) {
+        if (! empty($creator['email'])) {
             $this->emailClient->send(
-                $user['email'],
-                $user['name'] ?: $user['username'],
+                $creator['email'],
+                $creator['name'] ?: $creator['username'],
                 $this->getParam('subject'),
                 $this->template->render('notification/task_move_column', array(
                     'task' => $taskInfo,

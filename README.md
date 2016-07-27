@@ -1,9 +1,10 @@
 Automatic Action Plugin to Notify Creator
 ===================================
 
-This plugin adds a new automatic action to Kanboard.
+This plugin adds a new automatic actions to Kanboard.
 
-This will re-assign the task back to the creator and notify him when the task is moved to another column.
+1. Re-assign the task back to the creator and notify him when the task is moved to another column.
+2. Notify by email and add comment to task when due date is changed
 
 Author
 ------
@@ -14,5 +15,5 @@ Author
 Installation
 ------------
 
-- Create a directory **FicoActions** under the folder **plugins**
+- Create a directory **Ficoactions** under the folder **plugins**
 - Copy all source files in this new directory

@@ -1,21 +1,25 @@
 <?php
 
-namespace Kanboard\Plugin\FicoActions;
+namespace Kanboard\Plugin\Ficoactions;
 
 use Kanboard\Core\Translator;
 use Kanboard\Core\Plugin\Base;
-use Kanboard\Plugin\FicoActions\Action\TaskNotifyCreator;
+use Kanboard\Plugin\Ficoactions\Action\TaskNotifyCreator;
+use Kanboard\Plugin\Ficoactions\Action\CommentDueDateChange;
 
 class Plugin extends Base
 {
     public function initialize()
     {
         $this->actionManager->register(new TaskNotifyCreator($this->container));
+        $this->actionManager->register(new CommentDueDateChange($this->container));
+
+        //$this->template->hook->attach('template:notification', 'ficoactions:notification/due_date_updated');
     }
 
     public function getPluginName()
     {
-        return 'FicoActions';
+        return 'Ficoactions';
     }
 
     public function getPluginAuthor()
@@ -25,7 +29,7 @@ class Plugin extends Base
 
     public function getPluginVersion()
     {
-        return '0.0.2';
+        return '0.1.0';
     }
 
     public function onStartup()
@@ -40,6 +44,6 @@ class Plugin extends Base
 
     public function getPluginHomepage()
     {
-        return 'https://github.com/eSkiSo/FicoActions';
+        return 'https://github.com/eSkiSo/Ficoactions';
     }
 }
