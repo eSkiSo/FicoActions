@@ -79,7 +79,7 @@ class TaskNotifyCreator extends Base
     public function doAction(array $data)
     {
         $taskInfo = $this->taskFinderModel->getById($data['task_id']);
-        $creator = $this->creatorModel->getById($taskInfo['creator_id']);
+        $creator = $this->userModel->getById($taskInfo['creator_id']);
         $columnInfo = $this->columnModel->getById($taskInfo['creator_id']);
         $taskInfo['column_title'] = $columnInfo['title'];
         if($taskInfo['creator_id'] != $taskInfo['owner_id']) $this->taskModificationModel->update(array('id' => $data['task_id'], 'owner_id' => $taskInfo['creator_id']));
