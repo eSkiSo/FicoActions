@@ -5,6 +5,7 @@ namespace Kanboard\Plugin\Ficoactions;
 use Kanboard\Core\Translator;
 use Kanboard\Core\Plugin\Base;
 use Kanboard\Plugin\Ficoactions\Action\TaskNotifyCreator;
+use Kanboard\Plugin\Ficoactions\Action\SubTaskNotify;
 use Kanboard\Plugin\Ficoactions\Action\CommentDueDateChange;
 
 class Plugin extends Base
@@ -12,6 +13,7 @@ class Plugin extends Base
     public function initialize()
     {
         $this->actionManager->register(new TaskNotifyCreator($this->container));
+        $this->actionManager->register(new SubTaskNotify($this->container));
         $this->actionManager->register(new CommentDueDateChange($this->container));
     }
 
@@ -27,7 +29,7 @@ class Plugin extends Base
 
     public function getPluginVersion()
     {
-        return '0.1.0';
+        return '0.1.1';
     }
 
     public function onStartup()
@@ -37,7 +39,7 @@ class Plugin extends Base
 
     public function getPluginDescription()
     {
-        return 'Re-assign task back to creator and notify by email when task is moved to defined column';
+        return 'Re-assign task back to creator,notify by email when task is moved to defined column and notify on subtask';
     }
 
     public function getPluginHomepage()
