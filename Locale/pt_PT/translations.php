@@ -8,6 +8,6 @@ return array(
     'by' => 'por',
     'Sub-task updated' => 'Subtarefa atualizada',
     'New sub-task' => 'Nova subtarefa',
-    'Subtask Notify' => 'Notificar Subtarefas',
+    'Subtask Notify' => 'Notificação de Subtarefas',
     'Add comment on due date change and notify creator by email' => 'Adicionar comentário sobre mudança de data de vencimento e notificar o criador por e-mail',
 );
