@@ -4,6 +4,7 @@ namespace Kanboard\Plugin\Ficoactions;
 
 use Kanboard\Core\Translator;
 use Kanboard\Core\Plugin\Base;
+use Kanboard\Core\Event\EventManager;
 use Kanboard\Plugin\Ficoactions\Action\TaskNotifyCreator;
 use Kanboard\Plugin\Ficoactions\Action\SubTaskNotify;
 use Kanboard\Plugin\Ficoactions\Action\CommentDueDateChange;
@@ -12,6 +13,9 @@ class Plugin extends Base
 {
     public function initialize()
     {
+        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__.'/Locale');
+        $this->eventManager->register('subtask.create', t('New sub-task'));
+        $this->eventManager->register('subtask.update', t('Sub-task updated'));
         $this->actionManager->register(new TaskNotifyCreator($this->container));
         $this->actionManager->register(new SubTaskNotify($this->container));
         $this->actionManager->register(new CommentDueDateChange($this->container));
@@ -34,7 +38,7 @@ class Plugin extends Base
 
     public function onStartup()
     {
-        Translator::load($this->languageModel->getCurrentLanguage(), __DIR__.'/Locale');
+        //Translator::load($this->languageModel->getCurrentLanguage(), __DIR__.'/Locale');
     }
 
     public function getPluginDescription()

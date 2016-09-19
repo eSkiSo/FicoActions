@@ -62,9 +62,7 @@ class SubTaskNotify extends Base
     public function getEventRequiredParameters()
     {
         return array(
-            'id',
-            'task_id',
-            'user_id'
+            'subtask'
         );
     }
 
@@ -77,20 +75,19 @@ class SubTaskNotify extends Base
      */
     public function doAction(array $data)
     {
-        $taskInfo = $this->taskFinderModel->getById($data['task_id']);
-        $subTaskInfo = $this->SubtaskModel->getById($data['id']);
-        $creator = $this->userModel->getById($subTaskInfo['user_id']);
-        $columnInfo = $this->columnModel->getById($taskInfo['creator_id']);
-        $taskInfo['column_title'] = $columnInfo['title'];
+        if(isset($data['changes'])) $title_email = t('Sub-task updated');
+        else $title_email = t('New sub-task');
+
+        $creator = $this->userModel->getById($data['subtask']['user_id']);
 
         if (!empty($creator['email'])) {
             $this->emailClient->send(
                 $creator['email'],
                 $creator['name'] ?: $creator['username'],
-                'Nova Subtarefa Assignada',
+                $title_email,
                 $this->template->render('notification/subtask_create', array(
-                    'task' => $taskInfo,
-                    'subtask' => $subTaskInfo,
+                    'task' => $data['task'],
+                    'subtask' => $data['subtask'],
                     'application_url' => $this->configModel->get('application_url'),
                 ))
             );
